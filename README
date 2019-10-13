@@ -1,0 +1,51 @@
+The "armsysh" project is a system and interactive shell for the Atmel ATSAM3X8E MCU (as found on the Arduino Due board). It is mostly a port of the original "avrsysh" project written for AVR MCUs, and therefore it retains much of the same features.
+
+Some MCU functionality used:
+	- SysTick Timer
+	- Serial communication using the UART
+	- Some very basic power management using the "wfi" instruction
+
+Features of "armsysh" include:
+	- A lightweight "shell" from which to launch built-in commands
+		- with limited use of VT100 codes to support "backspace", "up" for previous command, and for clearing the screen
+		- tab completion support
+	- Some system utilities, including a "CPU usage" counter and a stack pointer monitor which samples the stack pointer and can help with estimating memory "usage" over time
+	- Some basic shell utilities commonly found on Unix-like systems, like "grep" and "seq"
+	- Basic capability to execute two concurrent threads, created when a pipe is used in the shell, with the output of the first command being fed in as the input to the second
+		- For example: "sysinfo | grep uptime"
+		- Note that not all commands are supported on either side of the pipe
+	- Random number generator
+		- LCG algorithm with some added entropy based on USART RX timings
+	- Some games
+		- Pong
+			- 'w'/'s' for player 1 controls; 'o'/'l' for player 2 controls; space to resume; 'Q' to quit
+		- Snake
+			- "wasd" to control; 'Q' to quit
+		- Bricks
+			- 'a'/'d' to control; space to resume; 'Q' to quit
+
+
+====================
+Build and run steps:
+
+1. Requirements:
+	- GCC "arm-none-eabi" compiler
+	- a copy of the CMSIS dependencies (can be found here: https://github.com/arduino/ArduinoCore-sam/tree/master/system/CMSIS)
+	- bossac, for flashing to the board
+
+2. Set up environment:
+	$ export ARM_CMSIS_DIR=ArduinoCore-sam-master/system/CMSIS/
+		- pointed to copy of CMSIS dependencies
+	$ export ARM_FLASH_PORT=ttyACM0
+
+3. Build:
+	$ make
+
+4. Flash to board:
+	$ make flash
+
+5. Connect to board over serial:
+	$ screen /dev/$ARM_FLASH_PORT 38400
+		- Or any other available serial communication tool
+
+6. Once connected over serial, type "help" to get a list of commands which can be run.
