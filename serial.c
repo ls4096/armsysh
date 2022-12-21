@@ -8,7 +8,9 @@
 
 #include <sam3x8e.h>
 
-#define BAUDRATE 38400
+#ifndef BAUDRATE
+	#define BAUDRATE 115200
+#endif
 
 static const unsigned char NEWLINE[2] = { 0x0d, 0x0a };
 
@@ -121,4 +123,9 @@ static void serial_init_hw()
 	NVIC_EnableIRQ(UART_IRQn);
 
 	UART->UART_CR = UART_CR_RXEN | UART_CR_TXEN;
+}
+
+unsigned int serial_get_baudrate()
+{
+	return BAUDRATE;
 }

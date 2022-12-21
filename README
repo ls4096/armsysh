@@ -34,9 +34,9 @@ Build and run steps:
 	- bossac, for flashing to the board
 
 2. Set up environment:
-	$ export ARM_CMSIS_DIR=ArduinoCore-sam-master/system/CMSIS/
+	$ export ARMSYSH_CMSIS_DIR=ArduinoCore-sam-master/system/CMSIS/
 		- pointed to copy of CMSIS dependencies
-	$ export ARM_FLASH_PORT=ttyACM0
+	$ export ARMSYSH_FLASH_PORT="/dev/ttyACM0"
 
 3. Build:
 	$ make
@@ -45,7 +45,7 @@ Build and run steps:
 	$ make flash
 
 5. Connect to board over serial:
-	$ screen /dev/$ARM_FLASH_PORT 38400
+	$ screen $ARMSYSH_FLASH_PORT 115200
 		- Or any other available serial communication tool
 
 6. Once connected over serial, type "help" to get a list of commands which can be run.

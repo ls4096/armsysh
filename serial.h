@@ -12,6 +12,8 @@ void serial_write(const unsigned char* data, int len);
 void serial_write_newline();
 void serial_tx_byte(unsigned char data);
 
+unsigned int serial_get_baudrate();
+
 #ifdef SERIAL_EXTRA_SUPPORT
 void serial_extra_start();
 void serial_extra_stop();

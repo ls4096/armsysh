@@ -1,3 +1,7 @@
+ifndef ARMSYSH_SERIAL_BAUDRATE
+	ARMSYSH_SERIAL_BAUDRATE := "115200"
+endif
+
 all: armsysh.bin
 
 OBJS = \
@@ -27,7 +31,7 @@ OBJS = \
 	system_sam3xa.o
 
 %.o: %.c
-	arm-none-eabi-gcc -c -Os -mcpu=cortex-m3 -mthumb -D__SAM3X8E__ -I$(ARM_CMSIS_DIR)/Device/ATMEL/sam3xa/include/ -I$(ARM_CMSIS_DIR)/CMSIS/Include/ -o $@ $<
+	arm-none-eabi-gcc -c -Os -mcpu=cortex-m3 -mthumb -D__SAM3X8E__ -DBAUDRATE=$(ARMSYSH_SERIAL_BAUDRATE) -I$(ARMSYSH_CMSIS_DIR)/Device/ATMEL/sam3xa/include/ -I$(ARMSYSH_CMSIS_DIR)/CMSIS/Include/ -o $@ $<
 
 %.o: %.S
 	arm-none-eabi-as -c -mcpu=cortex-m3 -mthumb -o $@ $<
@@ -43,4 +47,4 @@ clean:
 	rm -rf *.o *.elf *.bin
 
 flash: armsysh.bin
-	bossac -p $(ARM_FLASH_PORT) -e -w -v -b armsysh.bin
+	bossac -p $(ARMSYSH_FLASH_PORT) -e -w -v -b armsysh.bin

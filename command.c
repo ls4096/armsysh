@@ -563,6 +563,9 @@ static void pc_sys_info()
 
 	int s = ticks / TIMER_TICKS_PER_SECOND;
 
+	sprintf(buf, "build: " __DATE__ " " __TIME__ "\r\n");
+	serial_write(buf, strlen(buf));
+
 	sprintf(buf, "MCU: %s\r\n", ARM_MCU_TYPE);
 	serial_write(buf, strlen(buf));
 
@@ -585,6 +588,9 @@ static void pc_sys_info()
 	serial_write(buf, strlen(buf));
 
 	sprintf(buf, "thread switches: %u\r\n", thread_switch_count());
+	serial_write(buf, strlen(buf));
+
+	sprintf(buf, "serial baud: %u\r\n", serial_get_baudrate());
 	serial_write(buf, strlen(buf));
 }
 

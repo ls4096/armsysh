@@ -7,9 +7,19 @@ static int dtostr(int i, char* s);
 static int utostr(unsigned int u, char* s, bool lz, int md);
 static int htostr(unsigned int u, char* s, bool lz, int md);
 
+void* memcpy(void* dest, const void* src, size_t n)
+{
+	for (size_t i = 0; i < n; i++)
+	{
+		((unsigned char*)dest)[i] = ((unsigned char*)src)[i];
+	}
+
+	return dest;
+}
+
 void* memset(void* s, int c, size_t n)
 {
-	for (int i = 0; i < n; i++)
+	for (size_t i = 0; i < n; i++)
 	{
 		((unsigned char*)s)[i] = c;
 	}
