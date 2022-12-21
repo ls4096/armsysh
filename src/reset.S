@@ -1,3 +1,4 @@
+.syntax unified
 .global reset
 reset:
 	mov	r1, #0x08
