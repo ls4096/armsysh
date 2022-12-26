@@ -13,6 +13,7 @@ OBJS = \
 	src/draw.o \
 	src/dump.o \
 	src/grep.o \
+	src/handler.o \
 	src/lib.o \
 	src/pm.o \
 	src/pong.o \

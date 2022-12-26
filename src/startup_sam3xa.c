@@ -276,12 +276,13 @@ void Reset_Handler(void)
 	while (1);
 }
 
+#include "handler.h"
+
 /**
  * \brief Default interrupt handler for unused IRQs.
  */
 void Dummy_Handler(void)
 {
-	while (1) {
-	}
+	handle_missing();
 }
 
