@@ -101,11 +101,7 @@ void serial_tx_byte(unsigned char data)
 
 static void serial_init_hw()
 {
-	PIOA->PIO_IDR = PIO_PA8A_URXD | PIO_PA9A_UTXD;
 	PIOA->PIO_PDR = PIO_PA8A_URXD | PIO_PA9A_UTXD;
-	uint32_t absr = PIOA->PIO_ABSR;
-	PIOA->PIO_ABSR &= ~(PIO_PA8A_URXD | PIO_PA9A_UTXD) & absr;
-	PIOA->PIO_PUER = PIO_PA8A_URXD | PIO_PA9A_UTXD;
 
 	PMC->PMC_PCER0 |= PMC_PCER0_PID8;
 
@@ -114,7 +110,6 @@ static void serial_init_hw()
 	UART->UART_MR = UART_MR_CHMODE_NORMAL | UART_MR_PAR_NO;
 	UART->UART_BRGR = (SystemCoreClock / BAUDRATE) >> 4;
 
-	UART->UART_IDR = 0xffffffff;
 	UART->UART_IER = UART_IER_RXRDY;
 
 	NVIC_EnableIRQ(UART_IRQn);
