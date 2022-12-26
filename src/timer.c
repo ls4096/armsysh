@@ -4,6 +4,7 @@
 
 #include "armsysh_constants.h"
 #include "pm.h"
+#include "rng.h"
 #include "sp_mon.h"
 
 #include <sam3x8e.h>
@@ -36,6 +37,7 @@ void SysTick_Handler()
 	}
 
 	sp_mon_check();
+	rng_update();
 
 	int i;
 	for (i = 0; i < NOTIFY_COUNT_LIMIT; i++)

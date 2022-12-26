@@ -2,7 +2,6 @@
 
 #include "armsysh_constants.h"
 #include "pm.h"
-#include "rng.h"
 #include "thread.h"
 #include "timer.h"
 
@@ -42,8 +41,6 @@ void UART_Handler()
 
 	_rx_buf[_rx_buf_next_write] = c;
 	_rx_buf_next_write = ((_rx_buf_next_write + 1) % SERIAL_RX_BUF_SIZE);
-
-	rng_add_entropy(timer_get_tick_count_lsbyte());
 }
 
 

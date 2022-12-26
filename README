@@ -15,7 +15,7 @@ Features of "armsysh" include:
 		- For example: "sysinfo | grep uptime"
 		- Note that not all commands are supported on either side of the pipe
 	- Random number generator
-		- LCG algorithm with some added entropy based on USART RX timings
+		- LCG algorithm with periodic addition of output from TRNG
 	- Some games
 		- Pong
 			- 'w'/'s' for player 1 controls; 'o'/'l' for player 2 controls; space to resume; 'Q' to quit

@@ -3,6 +3,7 @@
 
 #include "command.h"
 #include "reset.h"
+#include "rng.h"
 #include "serial.h"
 #include "timer.h"
 
@@ -24,6 +25,7 @@ void main(void)
 
 	serial_init();
 	timer_init();
+	rng_init();
 
 	serial_write_newline();
 	serial_write(GREETING_1, strlen(GREETING_1));

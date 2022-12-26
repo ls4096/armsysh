@@ -1,6 +1,8 @@
 #include "rng.h"
 
-// A simple 32-bit LCG implementation that allows for adding optional entropy.
+#include <sam3x8e.h>
+
+// A simple 32-bit LCG implementation that allows for updating using additional entropy from the TRNG.
 
 // Constants chosen to satisfy Hull-Dobell requirements (with implied m=2^32).
 #define A 36777773
@@ -8,9 +10,15 @@
 
 static volatile unsigned int _r = 81618211;
 
-void rng_add_entropy(unsigned char e)
+void rng_init()
 {
-	_r ^= e;
+	PMC->PMC_PCER1 |= PMC_PCER1_PID41;
+	TRNG->TRNG_CR = (0x524e47 << 8) | 0x01;
+}
+
+void rng_update()
+{
+	_r ^= TRNG->TRNG_ODATA;
 }
 
 int rng_rand()
